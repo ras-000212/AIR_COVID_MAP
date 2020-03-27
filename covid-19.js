@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded",main);
 
 function main(){
-    var button = document.getElementById("b");
+    var button = document.getElementById("b-covid");
     button.addEventListener('click', function(){
         window.alert("teeeeeeeeeeest");
         var requestOptions = {
