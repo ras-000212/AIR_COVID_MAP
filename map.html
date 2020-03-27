@@ -20,15 +20,11 @@
   </head>
   <body>
     <div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
+    <script src="./google_map.js">
+        
+      //var URLGeolocalisation = "curl -d @your_filename.json -H 'Content-Type: application/json' -i 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap'";  
+
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap" defer></script>
   </body>
 </html>
