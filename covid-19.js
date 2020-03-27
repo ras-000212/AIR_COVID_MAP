@@ -16,8 +16,13 @@ function get_country_status(country,status){
       redirect: 'follow'
     };
     call(`${COVID_API}${COVID_OPTION}`, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        console.log(result.data[0])
+      })
+
+
       .catch(error => console.log(`error`, error));
   })
 }
