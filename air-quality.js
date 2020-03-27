@@ -15,16 +15,16 @@ function call(endpoint, requestOptions) {
 
 function get_states_list(){
 	var p = new Promise(function(resolve, reject){
-
+		const myList = document.querySelector('ul');
 		var requestOptions = {
 		  method: 'GET',
 		  redirect: 'follow'
 		};
 		
 		call("states?country=France", requestOptions)
-		  .then(response => response.text())
+		  .then(response => response.json())
 		  .then(result => console.log(result))
-		  .catch(error => console.log('error', error));
+		  .catch(error => console.log('error', error))
 	});	
 }
  
