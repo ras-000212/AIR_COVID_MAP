@@ -6,7 +6,7 @@ var google = require('./google_map.js');
 function main(){
 	var button = document.getElementById("b-covid");
 	button.addEventListener(`click`, function(){  
-		covid.getCountries();
+		showList();
 	});
 
 	var button = document.getElementById("b-air");
@@ -21,7 +21,21 @@ function main(){
 }
 
 function showList(){
+	let dropdown = document.getElementById('countries-covid');
+	dropdown.length = 0;
+	let defaultOption = document.createElement('option');
+	defaultOption.text = 'Choisissez le pays';
 
+	dropdown.add(defaultOption);
+	dropdown.selectedIndex = 0;
+	console.log(covid.getCountries().length);
+	let countries= covid.getCountries();
+	for(let i=0;i<countries.length;i++){
+		option = document.createElement('option');
+      	option.text = countries[i];
+      	option.value = countries[i];
+      	dropdown.add(option);
+	}
 }
 
 
