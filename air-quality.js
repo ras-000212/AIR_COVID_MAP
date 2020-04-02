@@ -7,7 +7,7 @@ var token = 'fb68fe36-52f3-44b7-9bc1-5106057100fc';
     button.addEventListener('click', async function(){
 		var state = await get_states_list()
 		await get_cities_list(state)
-     });  
+    });  
 }
 
 function call(endpoint, requestOptions) {
