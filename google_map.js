@@ -4,7 +4,7 @@ var API_key = 'AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap';
 
 function main(){ //à modifier...
     var button = document.getElementById("b-map");
-    button.addEventListener('click', async function(){
+    button.addEventListener('load', async function(){
 		await show_map()
     });  
 }
@@ -38,7 +38,7 @@ function call(endpoint, requestOptions) {
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
+        center: {lat: 48.856667, lng: 2.350987},
         zoom: 8
     });
 
