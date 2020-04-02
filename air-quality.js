@@ -1,4 +1,3 @@
-window.addEventListener("DOMContentLoaded",main);
 var baseUrl = 'https://cors-anywhere.herokuapp.com/https://api.airvisual.com/v2/';
 var token = 'fb68fe36-52f3-44b7-9bc1-5106057100fc';
 
@@ -7,7 +6,7 @@ function call(endpoint, requestOptions) {
 	return fetch(`${baseUrl}${endpoint}&key=${token}`, requestOptions)
 }
 
-function get_states_list(state){
+export function get_states_list(state){
 	var p = new Promise(function(resolve, reject){
 		const myList = document.querySelector('ul');
 		var requestOptions = {

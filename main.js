@@ -1,5 +1,6 @@
 var covid = require(`./covid-19.js`);
 var air = require(`./air-quality.js`);
+var google = require('./google_map.js');
 
 function main(){
 	var button = document.getElementById("b-covid");
@@ -8,9 +9,9 @@ function main(){
 	});
 
 	var button = document.getElementById("b-air");
-	button.addEventListener('click', async function(){
+	button.addEventListener('click', function(){
 		var state;
-		state=await air.get_states_list(state);
+		state= air.get_states_list(state);
 		//await get_cities_list(state)
 	});
 }

@@ -18,5 +18,8 @@
   "homepage": "https://github.com/ras-000212/AIR_COVID_MAP#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "google-map": "^1.1.0"
   }
 }

@@ -1,4 +1,3 @@
-window.addEventListener("DOMContentLoaded",main);
 var baseUrl = 'https://www.googleapis.com/';
 var API_key = 'AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap';
 
@@ -36,7 +35,7 @@ function call(endpoint, requestOptions) {
 }
 
 var map;
-function initMap() {
+export function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 8
