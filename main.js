@@ -1,5 +1,6 @@
 var covid = require(`./covid-19.js`);
 
+
 function main(){
 	var button = document.getElementById("b-covid");
 	button.addEventListener(`click`, function(){  
@@ -11,6 +12,12 @@ function main(){
 		var state = await get_states_list()
 		await get_cities_list(state)
 	});
+
+	
+}
+
+function showList(){
+
 }
 
 window.addEventListener("DOMContentLoaded", main);
