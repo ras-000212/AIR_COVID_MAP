@@ -3,7 +3,7 @@ var covid = require(`./covid-19.js`);
 function main(){
 	var button = document.getElementById("b-covid");
 	button.addEventListener(`click`, function(){  
-		covid.get_country_status(`france`,`confirmed`);
+		covid.getCountries();
 	});
 
 	var button = document.getElementById("b-air");
@@ -11,6 +11,12 @@ function main(){
 		var state = await get_states_list()
 		await get_cities_list(state)
 	});
+}
+
+
+
+function formCovid(){
+
 }
 
 window.addEventListener("DOMContentLoaded", main);
