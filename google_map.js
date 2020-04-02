@@ -1,14 +1,7 @@
 var baseUrl = 'https://www.googleapis.com/';
 var API_key = 'AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap';
 
-function main(){ //à modifier...
-    var button = document.getElementById("b-map");
-    button.addEventListener('load', async function(){
-		await show_map()
-    });  
-}
-
-var tMarker = [
+export var tMarker = [
     { lat : 44.837368,
       lon : -0.576144,
       title : 'Bordeaux'
@@ -30,21 +23,23 @@ var tMarker = [
 
 
   //pas besoins à vérifier...
-function call(endpoint, requestOptions) {
+export function call(endpoint, requestOptions) {
 	return fetch(`${baseUrl}${endpoint}&key=${API_key}`, requestOptions)
 }
 
-var map;
+export var map;
 export function initMap() {
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 48.856667, lng: 2.350987},
         zoom: 8
     });
+  
 
     createMarqueur(tMarker, map);
 }
  
-function createMarqueur( tab, map){
+export function createMarqueur( tab, map){
     var oLatLng, oMarker, data;
     var i, nb = tab.length;
    

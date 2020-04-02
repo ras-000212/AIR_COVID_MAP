@@ -16,6 +16,7 @@ function main(){
 		//await get_cities_list(state)
 	});
 
+	google.initMap();
 	
 }
 
