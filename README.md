@@ -11,7 +11,7 @@ Thanks to this feature, you can show the number of people infected with covid-19
 Thanks to this feature, you can show the air quality of the chosen country.
 
 
-#### Profile
+## Profile
 You didn't need a account to use our Webapp.
 
 
