@@ -24,7 +24,7 @@ function main(){
 		air.get_states_list()
 		.then(result => {
 			
-		}
+		})
 		console.log(state);
 		//await get_cities_list(state)
 	});
