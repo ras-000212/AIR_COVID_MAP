@@ -39,6 +39,22 @@ export function showMap(){
 
 }
 
+export function recupCitiesTest(rootBal){
+
+
+  for(var i = 0; i <tMarker.length; i++){
+    
+    //ajouter dans la liste déroulante...
+    tMarker[i]=result[i].Country;
+  }
+  
+  let listeTest = document.createElement('select');
+
+	listeTest.setAttribute("id","countries-covid");
+	rootBal.appendChild(listeTest);
+
+}
+
 export function createMarqueur(tab, map){
     var oLatLng, oMarker, data;
     var i, nb = tab.length;

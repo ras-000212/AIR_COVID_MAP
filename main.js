@@ -6,11 +6,59 @@ require("regenerator-runtime/runtime");
 
 function main(){
 
+<<<<<<< HEAD
+	
+	let rootBal =document.getElementById("root");
+
+	let btnCovid = document.createElement("button");
+	btnCovid.setAttribute("id","btn-Covid");
+	btnCovid.innerHTML ="COVID-19";
+	rootBal.appendChild(btnCovid);
+
+
+	//form Covid
+	let formCovid = document.createElement('form');
+	formCovid.setAttribute("id","form-covid");
+	formCovid.style.display="none";
+	rootBal.appendChild(formCovid);
+
+	//dropdown coutries
+	let selCountriesCov = document.createElement('select');
+	selCountriesCov.setAttribute("id","countries-covid");
+	formCovid.appendChild(selCountriesCov);
+
+	//dropdown status
+	let selStatusCov = document.createElement('select');
+	selStatusCov.setAttribute("id","status-covid");
+	formCovid.appendChild(selStatusCov);
+
+	//button "afficher"
+	let btnShow= document.createElement("button");
+	btnShow.setAttribute("id","btn-Covid-show");
+	btnShow.innerHTML ="afficher";
+	formCovid.appendChild(btnShow);
+
+	btnCovid.addEventListener(`click`, function(){ 
+		showFormCovid();
+		if(formCovid.style.display=="none"){
+			formCovid.style.display="block";
+		}else{
+			formCovid.style.display="none";
+		}
+	});
+
 	document.getElementById('form-covid').style.display="none";
 
 	var button = document.getElementById("b-covid");
 	button.addEventListener(`click`, function(){  	
 		showFormCovid();
+=======
+	document.getElementById('form-covid').style.display="none";
+
+	var button = document.getElementById("b-covid");
+	button.addEventListener(`click`, function(){  	
+		showFormCovid();
+>>>>>>> 3fa287e0e3223188c3cf491276f37476bc9353f2
 		if(document.getElementById('form-covid').style.display=="none"){
 			document.getElementById('form-covid').style.display="block";
 		}else{
@@ -27,6 +75,32 @@ function main(){
 		
 		states_air = await air.get_states_list()
 		.then(result => {
+<<<<<<< HEAD
+			for(var i = 0; i <result.data.length;i++){
+				states_air[i]=result.data[i];
+			}
+			console.log(states_air);
+			console.log(states_air.length);
+			for (var i=0; i<states_air.length;i++){
+				air.get_cities_list(states_air[i].state)
+				.then(result => {
+					for( i = 0; i <result.data.length;i++){
+						city_air[i]=result.data[i];
+					}
+					console.log(city_air);
+				})
+				.catch(error => console.log(`error`, error));
+			}
+			
+		})
+		.catch(error => console.log(`error`, error));
+		
+	});
+
+	
+
+	google.showMap();
+=======
 			console.log(result.data);
 			return result.data;
 		});
@@ -43,6 +117,7 @@ function main(){
 	});
 
 	google.initMap();
+>>>>>>> 3fa287e0e3223188c3cf491276f37476bc9353f2
 	
 }
 
