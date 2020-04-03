@@ -6,7 +6,6 @@ require("regenerator-runtime/runtime");
 
 function main(){
 
-<<<<<<< HEAD
 	
 	let rootBal =document.getElementById("root");
 
@@ -52,13 +51,11 @@ function main(){
 	var button = document.getElementById("b-covid");
 	button.addEventListener(`click`, function(){  	
 		showFormCovid();
-=======
 	document.getElementById('form-covid').style.display="none";
 
 	var button = document.getElementById("b-covid");
 	button.addEventListener(`click`, function(){  	
 		showFormCovid();
->>>>>>> 3fa287e0e3223188c3cf491276f37476bc9353f2
 		if(document.getElementById('form-covid').style.display=="none"){
 			document.getElementById('form-covid').style.display="block";
 		}else{
@@ -75,32 +72,6 @@ function main(){
 		
 		states_air = await air.get_states_list()
 		.then(result => {
-<<<<<<< HEAD
-			for(var i = 0; i <result.data.length;i++){
-				states_air[i]=result.data[i];
-			}
-			console.log(states_air);
-			console.log(states_air.length);
-			for (var i=0; i<states_air.length;i++){
-				air.get_cities_list(states_air[i].state)
-				.then(result => {
-					for( i = 0; i <result.data.length;i++){
-						city_air[i]=result.data[i];
-					}
-					console.log(city_air);
-				})
-				.catch(error => console.log(`error`, error));
-			}
-			
-		})
-		.catch(error => console.log(`error`, error));
-		
-	});
-
-	
-
-	google.showMap();
-=======
 			console.log(result.data);
 			return result.data;
 		});
@@ -116,10 +87,24 @@ function main(){
 		console.log(city_states);
 	});
 
-	google.initMap();
->>>>>>> 3fa287e0e3223188c3cf491276f37476bc9353f2
+	google.showMap();
+			console.log(result.data);
+			return result.data;
+		});
+
+		console.log(states_air);
+		for (var i=0; i<states_air.length;i++){
+			let city_air= await air.get_cities_list(states_air[i].state)
+			.then(result => {
+				return result.data;
+			});
+			city_states[i] = city_air;
+		}
+		console.log(city_states);
+		google.initMap();
 	
-}
+	};
+
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
 function showFormCovid(){
