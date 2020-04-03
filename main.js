@@ -68,15 +68,16 @@ function main(){
 		let states_air=[];
 		let city_air=[];
 		let city_states=[];
-		console.log("test");
 		
+		/* bdd des régions de la bdd */
 		states_air = await air.get_states_list()
 		.then(result => {
 			console.log(result.data);
 			return result.data;
 		});
-
 		console.log(states_air);
+		
+		/* bdd des villes de la bdd */
 		for (var i=0; i<states_air.length;i++){
 			let city_air= await air.get_cities_list(states_air[i].state)
 			.then(result => {
@@ -85,6 +86,17 @@ function main(){
 			city_states[i] = city_air;
 		}
 		console.log(city_states);
+		
+		/* bdd des villes de la bdd */
+		for (var i=0; i<states_air.length;i++){
+				for (var j=0; j<city_states[i].length;j++){
+					let city_air= await air.get_specified_city(city_states[i][j],states_air[i])
+					.then(result => {
+						console.log(result.data);
+					});
+			}
+		}
+		
 	});
 
 	google.showMap();
