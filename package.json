@@ -20,6 +20,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "google-map": "^1.1.0"
+    "google-map": "^1.1.0",
+    "google-maps": "^4.2.3"
   }
 }
