@@ -8,7 +8,6 @@ function call(endpoint, requestOptions) {
 }
 
 export function get_states_list(){
-		const myList = document.querySelector('ul');
 		var requestOptions = {
 		  method: 'GET',
 		  redirect: 'follow'
@@ -20,17 +19,33 @@ export function get_states_list(){
 		  
 		return p;  
 }
+
  
-export function get_city_list(state){
-		const myList = document.querySelector('ul');
+export function get_cities_list(state){
 		var requestOptions = {
 		  method: 'GET',
 		  redirect: 'follow'
 		};
 		
-		var p =call("cities?state= &country=France", requestOptions)
+		let request = "cities?state="+state+"&country=France";
+		console.log(state);
+		var p =call(request, requestOptions)
 		  .then(response => response.json())
 		  .catch(error => console.log('error', error))
 		  
 		return p;  
-}    
+} 
+
+export function get_specified_city(city,state){
+		var requestOptions = {
+		  method: 'GET',
+		  redirect: 'follow'
+		};
+		
+		let request = "city?city="+city+"&state="+state+"&country=France";
+		var p =call(request, requestOptions)
+		  .then(response => response.json())
+		  .catch(error => console.log('error', error))
+		  
+		return p;  
+}
