@@ -1,5 +1,5 @@
 # AIR COVID MAP
-It's a webapp that will show through a map the rate of patients infected with Covid-19 by region or country.It will also be able to show the air quality of the region or the country.
+It's a webapp that will show through a map the rate of patients infected with Covid-19 by region or country. It will also be able to show the air quality of the region or the country.
 
 ## Features
 Our Webapp has 2 main features :
