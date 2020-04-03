@@ -3,11 +3,12 @@ var air = require(`./air-quality.js`);
 var google = require('./google_map.js');
 require("regenerator-runtime/runtime");
 
+
 function main(){
-	//mise en place des boutons
+
+	
 	let rootBal =document.getElementById("root");
 
-	//button COVID
 	let btnCovid = document.createElement("button");
 	btnCovid.setAttribute("id","btn-Covid");
 	btnCovid.innerHTML ="COVID-19";
@@ -35,22 +36,36 @@ function main(){
 	btnShow.setAttribute("id","btn-Covid-show");
 	btnShow.innerHTML ="afficher";
 	formCovid.appendChild(btnShow);
-	
+
 	btnCovid.addEventListener(`click`, function(){ 
 		showFormCovid();
 		if(formCovid.style.display=="none"){
-		formCovid.style.display="block";
+			formCovid.style.display="block";
 		}else{
-		formCovid.style.display="none";
+			formCovid.style.display="none";
+		}
+	});
+
+	document.getElementById('form-covid').style.display="none";
+
+	var button = document.getElementById("b-covid");
+	button.addEventListener(`click`, function(){  	
+		showFormCovid();
+		if(document.getElementById('form-covid').style.display=="none"){
+			document.getElementById('form-covid').style.display="block";
+		}else{
+			document.getElementById('form-covid').style.display="none";
 		}
 	});
 
 	var button = document.getElementById("b-air");
-	button.addEventListener('click', function(){
+	button.addEventListener('click', async function(){
 		let states_air=[];
 		let city_air=[];
+		let city_states=[];
+		console.log("test");
 		
-		 air.get_states_list()
+		states_air = await air.get_states_list()
 		.then(result => {
 			for(var i = 0; i <result.data.length;i++){
 				states_air[i]=result.data[i];
@@ -72,13 +87,15 @@ function main(){
 		.catch(error => console.log(`error`, error));
 		
 	});
+
 	
+
 	google.showMap();
 	
 }
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
-async function showFormCovid(){
+function showFormCovid(){
 
 	let dropdownCountries = document.getElementById('countries-covid');
 	dropdownCountries.length = 0;
@@ -88,13 +105,22 @@ async function showFormCovid(){
 	dropdownCountries.add(defaultOptionCountries);
 	dropdownCountries.selectedIndex = 0;
 
-		let countries = await covid.getCountries();
-		for(var i = 1; i <countries.length;i++){
+	var requestOptions = {
+		method: 'GET',
+		redirect: 'follow'
+	  };
+	  
+	  fetch("https://api.covid19api.com/countries", requestOptions)
+		.then(response => response.json())
+		.then(result => {
+		  for(var i = 1; i <result.length;i++){
 			option = document.createElement('option');
-			option.text = countries[i];
-		  	option.value = countries[i];
+			option.text = result[i].Country;
+		  	option.value = result[i].Country;
 			dropdownCountries.add(option);
-		}
+		  }
+		})
+		.catch(error => console.log('error', error));
 
 		let dropdownStatus = document.getElementById('status-covid');
 		dropdownStatus.length = 0;
@@ -113,7 +139,8 @@ async function showFormCovid(){
 		  	option.value = status[i];
 			dropdownStatus.add(option);
 		  }
-		
+
+	
 }
 
 
@@ -123,3 +150,4 @@ function formCovid(){
 }
 
 window.addEventListener("DOMContentLoaded", main);
+
