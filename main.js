@@ -10,8 +10,11 @@ function main(){
 
 	var button = document.getElementById("b-air");
 	button.addEventListener('click', function(){
-		var state;
-		state= air.get_states_list(state);
+		air.get_states_list()
+		.then(result => {
+			
+		}
+		console.log(state);
 		//await get_cities_list(state)
 	});
 }
