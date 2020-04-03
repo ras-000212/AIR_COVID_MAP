@@ -4,13 +4,6 @@ var google = require('./google_map.js');
 require("regenerator-runtime/runtime");
 
 function main(){
-<<<<<<< HEAD
-
-	document.getElementById('form-covid').style.display="none";
-
-	var button = document.getElementById("b-covid");
-	button.addEventListener(`click`, function(){  	
-=======
 	//mise en place des boutons
 	let rootBal =document.getElementById("root");
 
@@ -44,7 +37,6 @@ function main(){
 	formCovid.appendChild(btnShow);
 	
 	btnCovid.addEventListener(`click`, function(){ 
->>>>>>> 27af72841cf5f8af2868e7ff9b092c1c0846d455
 		showFormCovid();
 		if(formCovid.style.display=="none"){
 		formCovid.style.display="block";
