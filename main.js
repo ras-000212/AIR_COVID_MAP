@@ -48,12 +48,32 @@ function main(){
 
 	var button = document.getElementById("b-air");
 	button.addEventListener('click', function(){
-		air.get_states_list()
+		let states_air=[];
+		let city_air=[];
+		
+		 air.get_states_list()
 		.then(result => {
+			for(var i = 0; i <result.data.length;i++){
+				states_air[i]=result.data[i];
+			}
+			console.log(states_air);
+			console.log(states_air.length);
+			for (var i=0; i<states_air.length;i++){
+				air.get_cities_list(states_air[i].state)
+				.then(result => {
+					for( i = 0; i <result.data.length;i++){
+						city_air[i]=result.data[i];
+					}
+					console.log(city_air);
+				})
+				.catch(error => console.log(`error`, error));
+			}
 			
 		})
-		console.log(state);
-		//await get_cities_list(state)
+		.catch(error => console.log(`error`, error));
+		
+		
+		
 	});
 
 	google.initMap();
