@@ -15,7 +15,7 @@ function main(){
 			document.getElementById('form-covid').style.display="block";
 		}else{
 			document.getElementById('form-covid').style.display="none";
-		}
+		}	
 	});
 
 	var button = document.getElementById("b-air");
@@ -92,6 +92,8 @@ function showFormCovid(){
 			dropdownStatus.add(option);
 		  }
 
+		
+		
 	
 }
 
