@@ -24,12 +24,13 @@ export function getCountries(){
     redirect: 'follow'
   };
   
-  fetch("https://api.covid19api.com/countries", requestOptions)
+  return fetch("https://api.covid19api.com/countries", requestOptions)
     .then(response => response.json())
     .then(result => {
       for(var i = 1; i <result.length;i++){
         countries[i]=result[i].Country;
       }
+      return countries;
     })
     .catch(error => console.log('error', error));
 } 
