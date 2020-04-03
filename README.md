@@ -7,11 +7,11 @@ Our Webapp has 2 main features :
 ### Covid-19 Indicator
 Thanks to this feature, you can show the number of people infected with covid-19, treated with covid-19 or died from covid-19, depending on the country.
 
-#### Air quality Indicator
+### Air quality Indicator
 Thanks to this feature, you can show the air quality of the chosen country.
 
 
-### Profile
+#### Profile
 You didn't need a account to use our Webapp.
 
 
