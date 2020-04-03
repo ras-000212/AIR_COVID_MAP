@@ -5,15 +5,44 @@ require("regenerator-runtime/runtime");
 
 
 function main(){
+	//mise en place des boutons
+	let rootBal =document.getElementById("root");
 
-	document.getElementById('form-covid').style.display="none";
-	var button = document.getElementById("b-covid");
-	button.addEventListener(`click`, function(){ 
+	//button COVID
+	let btnCovid = document.createElement("button");
+	btnCovid.setAttribute("id","btn-Covid");
+	btnCovid.innerHTML ="COVID-19";
+	rootBal.appendChild(btnCovid);
+
+
+	//form Covid
+	let formCovid = document.createElement('form');
+	formCovid.setAttribute("id","form-covid");
+	formCovid.style.display="none";
+	rootBal.appendChild(formCovid);
+
+	//dropdown coutries
+	let selCountriesCov = document.createElement('select');
+	selCountriesCov.setAttribute("id","countries-covid");
+	formCovid.appendChild(selCountriesCov);
+
+	//dropdown status
+	let selStatusCov = document.createElement('select');
+	selStatusCov.setAttribute("id","status-covid");
+	formCovid.appendChild(selStatusCov);
+
+	//button "afficher"
+	let btnShow= document.createElement("button");
+	btnShow.setAttribute("id","btn-Covid-show");
+	btnShow.innerHTML ="afficher";
+	formCovid.appendChild(btnShow);
+	
+	btnCovid.addEventListener(`click`, function(){ 
 		showFormCovid();
-		if(document.getElementById('form-covid').style.display=="none"){
-		document.getElementById('form-covid').style.display="block";
+		if(formCovid.style.display=="none"){
+		formCovid.style.display="block";
 		}else{
-			document.getElementById('form-covid').style.display="none";
+		formCovid.style.display="none";
 		}
 	});
 
