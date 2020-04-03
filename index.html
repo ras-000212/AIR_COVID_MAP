@@ -2,14 +2,19 @@
 	<head>
 		<title>Accueil</title>
 		<link type="text/css" rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">	
 		
 	</head>
 
 	<body>
 		<input type="button" id="b-covid" value="Covid">
-		<form id="form-covid">
+		<form id="form-covid" type="hidden">
 			<select id="countries-covid" name="countries">
 			</select>
+
+			<select id="status-covid" name="status">
+			</select>
+			<input type="button" id="display-covid" value="Afficher">
 		</form>
 
 		</div>

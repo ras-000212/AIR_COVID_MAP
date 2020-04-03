@@ -27,12 +27,9 @@ export function getCountries(){
   fetch("https://api.covid19api.com/countries", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result);
       for(var i = 1; i <result.length;i++){
         countries[i]=result[i].Country;
-        console.log(countries[i]);
       }
-      return countries;
     })
     .catch(error => console.log('error', error));
 } 
