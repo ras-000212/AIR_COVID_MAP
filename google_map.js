@@ -1,6 +1,9 @@
 var baseUrl = 'https://www.googleapis.com/';
-var API_key = 'AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM&callback=initMap';
+var API_key = 'AIzaSyC6IeWIYNrcXUMhTSy2XORDhQyboXO-atM';
+const {Loader} = require('google-maps');
 
+
+/* liste de villes exemples */
 export var tMarker = [
     { lat : 44.837368,
       lon : -0.576144,
@@ -21,25 +24,22 @@ export var tMarker = [
     }
 ];
 
+export function showMap(){
 
-  //pas besoins à vérifier...
-export function call(endpoint, requestOptions) {
-	return fetch(`${baseUrl}${endpoint}&key=${API_key}`, requestOptions)
-}
-
-export var map;
-export function initMap() {
-
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 48.856667, lng: 2.350987},
-        zoom: 8
-    });
+  const loader = new Loader(API_key);
   
-
+  loader.load().then(function (google) {
+    var map;
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 48.856667, lng: 2.350987},
+      zoom: 8
+    });
     createMarqueur(tMarker, map);
+  });
+
 }
- 
-export function createMarqueur( tab, map){
+
+export function createMarqueur(tab, map){
     var oLatLng, oMarker, data;
     var i, nb = tab.length;
    
