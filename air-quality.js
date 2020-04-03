@@ -1,4 +1,3 @@
-
 var baseUrl = 'https://cors-anywhere.herokuapp.com/https://api.airvisual.com/v2/';
 var token = 'fb68fe36-52f3-44b7-9bc1-5106057100fc';
 
@@ -12,7 +11,6 @@ export function get_states_list(){
 		  method: 'GET',
 		  redirect: 'follow'
 		};
-		
 		var p =call("states?country=France", requestOptions)
 		  .then(response => response.json())
 		  .catch(error => console.log('error', error))
