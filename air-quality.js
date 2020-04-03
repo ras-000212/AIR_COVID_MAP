@@ -1,3 +1,4 @@
+
 var baseUrl = 'https://cors-anywhere.herokuapp.com/https://api.airvisual.com/v2/';
 var token = 'fb68fe36-52f3-44b7-9bc1-5106057100fc';
 
