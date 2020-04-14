@@ -6,7 +6,6 @@ require("regenerator-runtime/runtime");
 
 function main(){
 
-	
 	let rootBal =document.getElementById("root");
 
 	let btnCovid = document.createElement("button");
@@ -46,54 +45,60 @@ function main(){
 		}
 	});
 
-	document.getElementById('form-covid').style.display="none";
-
-	var button = document.getElementById("b-covid");
-	button.addEventListener(`click`, function(){  	
-		showFormCovid();
-		if(document.getElementById('form-covid').style.display=="none"){
-			document.getElementById('form-covid').style.display="block";
-		}else{
-			document.getElementById('form-covid').style.display="none";
-		}	
-	});
 
 	var button = document.getElementById("b-air");
 	button.addEventListener('click', async function(){
 		let states_air=[];
 		let city_air=[];
 		let city_states=[];
-		console.log("test");
 		
+		/* bdd des régions de la bdd */
 		states_air = await air.get_states_list()
 		.then(result => {
-			for(var i = 0; i <result.data.length;i++){
-				states_air[i]=result.data[i];
+			console.log(result.data);
+			return result.data;
+		});
+		console.log(states_air);
+		
+		/* bdd des villes de la bdd */
+		for (var i=0; i<states_air.length;i++){
+			let city_air= await air.get_cities_list(states_air[i].state)
+			.then(result => {
+				return result.data;
+			});
+			city_states[i] = city_air;
+		}
+		console.log(city_states);
+		
+		/* bdd des villes de la bdd */
+		for (var i=0; i<states_air.length;i++){
+				for (var j=0; j<city_states[i].length;j++){
+					let city_air= await air.get_specified_city(city_states[i][j],states_air[i])
+					.then(result => {
+						console.log(result.data);
+					});
 			}
-			console.log(states_air);
-			console.log(states_air.length);
-			for (var i=0; i<states_air.length;i++){
-				air.get_cities_list(states_air[i].state)
-				.then(result => {
-					for( i = 0; i <result.data.length;i++){
-						city_air[i]=result.data[i];
-					}
-					console.log(city_air);
-				})
-				.catch(error => console.log(`error`, error));
-			}
-			
-		})
-		.catch(error => console.log(`error`, error));
+		}
 		
 	});
 
 	google.showMap();
-	//appeler fonction qui créer sélection de ville
+			console.log(result.data);
+			return result.data;
+
+		console.log(states_air);
+		for (var i=0; i<states_air.length;i++){
+			let city_air = air.get_cities_list(states_air[i].state)
+			.then(result => {
+				return result.data;
+			});
+			city_states[i] = city_air;
+		}
+		console.log(city_states);
+		google.initMap();
 	
-	//lier avec la map
-	
-}
+	};
+
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
 function showFormCovid(){
