@@ -2,7 +2,10 @@ var COVID_API = `https://api.covid19api.com/`;
 
 //Get casses of a country depends of the status(confirmed,recovered,deaths)
 export function get_country_status(country,status){
+  let cases =[];
+  
   var COVID_OPTION = `country/${country}/status/${status}`;
+  console.log(COVID_OPTION);
   var requestOptions = {
       method: 'GET',
       redirect: 'follow'
@@ -10,7 +13,15 @@ export function get_country_status(country,status){
     fetch(`${COVID_API}${COVID_OPTION}`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
+        for(var i = 0;i<result.length;i++){
+          cases[i] = {"lat" : result[i].Lat,
+          "lon": result[i].Lon,
+          "cases":result[i].Cases,
+          "date":result[i].Date};
+        }
+        console.log(cases);
+        return cases;
+
       })
       .catch(error => console.log(`error`, error));
 }
@@ -34,6 +45,9 @@ export function getCountries(){
     })
     .catch(error => console.log('error', error));
 } 
+
+
+
 
 
 
