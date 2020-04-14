@@ -6,7 +6,6 @@ require("regenerator-runtime/runtime");
 
 function main(){
 
-	
 	let rootBal =document.getElementById("root");
 
 	let btnCovid = document.createElement("button");
@@ -46,22 +45,6 @@ function main(){
 		}
 	});
 
-	document.getElementById('form-covid').style.display="none";
-
-	var button = document.getElementById("b-covid");
-	button.addEventListener(`click`, function(){  	
-		showFormCovid();
-	document.getElementById('form-covid').style.display="none";
-
-	var button = document.getElementById("b-covid");
-	button.addEventListener(`click`, function(){  	
-		showFormCovid();
-		if(document.getElementById('form-covid').style.display=="none"){
-			document.getElementById('form-covid').style.display="block";
-		}else{
-			document.getElementById('form-covid').style.display="none";
-		}	
-	});
 
 	var button = document.getElementById("b-air");
 	button.addEventListener('click', async function(){
@@ -102,11 +85,10 @@ function main(){
 	google.showMap();
 			console.log(result.data);
 			return result.data;
-		});
 
 		console.log(states_air);
 		for (var i=0; i<states_air.length;i++){
-			let city_air= await air.get_cities_list(states_air[i].state)
+			let city_air = air.get_cities_list(states_air[i].state)
 			.then(result => {
 				return result.data;
 			});
