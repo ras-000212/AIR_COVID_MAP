@@ -89,6 +89,9 @@ function main(){
 	});
 
 	google.showMap();
+	//appeler fonction qui créer sélection de ville
+	
+	//lier avec la map
 	
 }
 
