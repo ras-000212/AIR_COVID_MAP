@@ -5,7 +5,7 @@ require("regenerator-runtime/runtime");
 
 
 function main(){
-
+	
 	let rootBal =document.getElementById("root");
 
 	let btnCovid = document.createElement("button");
@@ -33,8 +33,11 @@ function main(){
 	//button "afficher"
 	let btnShow= document.createElement("button");
 	btnShow.setAttribute("id","btn-Covid-show");
+	btnShow.setAttribute("type","button")
 	btnShow.innerHTML ="afficher";
 	formCovid.appendChild(btnShow);
+
+	
 
 	btnCovid.addEventListener(`click`, function(){ 
 		showFormCovid();
@@ -45,6 +48,18 @@ function main(){
 		}
 	});
 
+//get the dropdown value and call the getcountrystatus
+	btnShow.addEventListener(`click`,function(){
+		let ecountries = document.getElementById("countries-covid");
+		let strCountries = ecountries.options[ecountries.selectedIndex].value;
+		
+		let eStatus = document.getElementById("status-covid");
+		let strStatus = eStatus.options[eStatus.selectedIndex].value;
+		console.log(strCountries+strStatus);
+		let resultat = covid.get_country_status(strCountries,strStatus);
+
+
+	})
 
 	var button = document.getElementById("b-air");
 	button.addEventListener('click', async function(){
@@ -79,7 +94,6 @@ function main(){
 					});
 			}
 		}
-		
 	});
 
 	google.showMap();
@@ -90,6 +104,21 @@ function main(){
 	//afficher marqueurs
 
 };
+/* 			console.log(result.data);
+			return result.data;
+ */
+/* 		console.log(states_air);
+		for (var i=0; i<states_air.length;i++){
+			let city_air = air.get_cities_list(states_air[i].state)
+			.then(result => {
+				return result.data;
+			});
+			city_states[i] = city_air;
+		}
+		console.log(city_states); */
+		// google.initMap();
+	
+	};
 
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
