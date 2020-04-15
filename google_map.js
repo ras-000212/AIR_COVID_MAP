@@ -24,6 +24,7 @@ export var tMarker = [
     }
 ];
 
+
 export function showMap(){
 
   const loader = new Loader(API_key);
@@ -34,12 +35,20 @@ export function showMap(){
       center: {lat: 48.856667, lng: 2.350987},
       zoom: 8
     });
-    createMarqueur(tMarker, map);
-  });
 
+    createMarqueur(tMarker, map);
+
+    //createMarqueur(tMarker, map);
+
+    
+
+    /*map.addListener(popup, "closeclick", function() {
+      currentPopup = null;
+    });*/
+  });
 }
 
-export function recupCitiesTest(rootBal){
+/*export function recupCitiesTest(rootBal){
 
 
   for(var i = 0; i <tMarker.length; i++){
@@ -53,20 +62,94 @@ export function recupCitiesTest(rootBal){
 	listeTest.setAttribute("id","countries-covid");
 	rootBal.appendChild(listeTest);
 
-}
+}*/
 
 export function createMarqueur(tab, map){
     var oLatLng, oMarker, data;
-    var i, nb = tab.length;
+    var i, nb = tMarker.length;
    
     for( i = 0; i < nb; i++){
-      data = tab[i];
+      data = tMarker[i];
       oLatLng = new google.maps.LatLng( data.lat, data.lon);
       oMarker = new google.maps.Marker({
         position : oLatLng,
         map : map,
         title : data.title
       });
+
+      let popup = new google.maps.InfoWindow({
+        content: "testtt",
+        map : map,
+        maxWidth: 300,
+        maxHeight:100
+      });
+
+      attachSecretMessage(oMarker, "testtttt");
+
+      /*google.maps.event.addListener(oMarker, "click", function() {
+        if (currentPopup != null) {
+          currentPopup.close();
+          currentPopup = null;
+  
+        }
+     
+        popup.open(map, oMarker);
+        currentPopup = popup;
+      });
+
+      google.maps.event.addListener(popup, "closeclick", function() {
+        // On vide la variable
+        currentPopup = null;
+      });*/
     }
 }
-    
+
+
+// Attaches an info window to a marker with the provided message. When the
+// marker is clicked, the info window will open with the secret message.
+function attachSecretMessage(marker, secretMessage) {
+  var infowindow = new google.maps.InfoWindow({
+    content: secretMessage
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+
+}
+
+/*export function infoMarker(marker){
+
+  let m = getElementById("map");
+
+  m.addListener(marker, 'click', (function(marker, i) {
+    return function() {
+      infoWindow.open(map, marker);
+    }
+  })(marker, i));
+
+}*/
+
+/*map.addListener(oMarker, 'click', (function(oMarker, i) {
+        return function() {
+            infoWindow.open(map, oMarker);
+        }
+      })(oMarker, i));
+var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+
+map.addEventListener(oMarker, 'click', function() {
+  infoWindow.open(map, oMarker);
+})*/
+
+/*oMarker.addEventListener("click", detectClickMarker(oMarker));
+
+export function detectClickMarker(marker){
+    marker.openInfoWindowHtml(
+      '<strong>Testttt dedeyyy</strong>' +
+      '<br /><p>Dedeyyyyyy</p>' +
+      '<br /><a href="http://fr.wikipedia.org/wiki/Place_Bellecour">Voir l\'article sur Wikipedia (fr)</a>'
+    );
+}*/
+
+
+      

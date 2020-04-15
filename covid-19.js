@@ -35,8 +35,6 @@ export function getCountries(){
     .catch(error => console.log('error', error));
 } 
 
-
-
 export default {
 	baseURL: COVID_API,
 	function : get_country_status()

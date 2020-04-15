@@ -83,21 +83,13 @@ function main(){
 	});
 
 	google.showMap();
-			console.log(result.data);
-			return result.data;
+	/*console.log(result.data);
+	return result.data;*/
 
-		console.log(states_air);
-		for (var i=0; i<states_air.length;i++){
-			let city_air = air.get_cities_list(states_air[i].state)
-			.then(result => {
-				return result.data;
-			});
-			city_states[i] = city_air;
-		}
-		console.log(city_states);
-		google.initMap();
-	
-	};
+
+	//afficher marqueurs
+
+};
 
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
@@ -114,7 +106,7 @@ function showFormCovid(){
 	var requestOptions = {
 		method: 'GET',
 		redirect: 'follow'
-	  };
+	};
 	  
 	  fetch("https://api.covid19api.com/countries", requestOptions)
 		.then(response => response.json())
@@ -144,13 +136,15 @@ function showFormCovid(){
 			option.text = status[i];
 		  	option.value = status[i];
 			dropdownStatus.add(option);
-		  }
-
-		
-		
+		}	
 	
 }
 
+function recupCountries(){
+
+
+
+}
 
 
 function formCovid(){
