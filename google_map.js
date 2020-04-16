@@ -25,83 +25,62 @@ export var tMarker = [
 ];
 
 
-export function showMap(){
+export function showMap(resss){
+
+  
 
   const loader = new Loader(API_key);
   
-  loader.load().then(function (google) {
-    var map;
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 48.856667, lng: 2.350987},
-      zoom: 8
+    loader.load().then(function (google) {
+      var map;
+ 
+      resss.then(values => { 
+        let d = values[1];
+        console.log(d); //ça marche!!!
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 42.71, lng: 19.37},
+          zoom: 1
+        });
+
+        createMarqueur(resss, map);
+    
+      });
+      
     });
 
-    createMarqueur(tMarker, map);
-
-    //createMarqueur(tMarker, map);
-
-    
-
-    /*map.addListener(popup, "closeclick", function() {
-      currentPopup = null;
-    });*/
-  });
 }
-
-/*export function recupCitiesTest(rootBal){
-
-
-  for(var i = 0; i <tMarker.length; i++){
-    
-    //ajouter dans la liste déroulante...
-    tMarker[i]=result[i].Country;
-  }
-  
-  let listeTest = document.createElement('select');
-
-	listeTest.setAttribute("id","countries-covid");
-	rootBal.appendChild(listeTest);
-
-}*/
 
 export function createMarqueur(tab, map){
     var oLatLng, oMarker, data;
-    var i, nb = tMarker.length;
-   
-    for( i = 0; i < nb; i++){
-      data = tMarker[i];
-      oLatLng = new google.maps.LatLng( data.lat, data.lon);
-      oMarker = new google.maps.Marker({
-        position : oLatLng,
-        map : map,
-        title : data.title
-      });
+    
+    tab.then(values => { 
 
-      let popup = new google.maps.InfoWindow({
-        content: "testtt",
-        map : map,
-        maxWidth: 300,
-        maxHeight:100
-      });
-
-      attachSecretMessage(oMarker, "testtttt");
-
-      /*google.maps.event.addListener(oMarker, "click", function() {
-        if (currentPopup != null) {
-          currentPopup.close();
-          currentPopup = null;
+      var i, nb = values.length;
+      console.log(nb); 
+      
+      for( i = 0; i < nb; i++){
+        
+        data = values[i];
+        
+        oLatLng = new google.maps.LatLng( data.lat, data.lon);
+        oMarker = new google.maps.Marker({
+          position : oLatLng,
+          map : map
+        });
   
-        }
-     
-        popup.open(map, oMarker);
-        currentPopup = popup;
-      });
+        /*let popup = new google.maps.InfoWindow({
+          content: data.date,
+          map : map,
+          maxWidth: 300,
+          maxHeight:100
+        });*/
+  
+        attachSecretMessage(oMarker, data.date);
+      }
 
-      google.maps.event.addListener(popup, "closeclick", function() {
-        // On vide la variable
-        currentPopup = null;
-      });*/
-    }
+    });
+    
 }
 
 
@@ -117,39 +96,3 @@ function attachSecretMessage(marker, secretMessage) {
   });
 
 }
-
-/*export function infoMarker(marker){
-
-  let m = getElementById("map");
-
-  m.addListener(marker, 'click', (function(marker, i) {
-    return function() {
-      infoWindow.open(map, marker);
-    }
-  })(marker, i));
-
-}*/
-
-/*map.addListener(oMarker, 'click', (function(oMarker, i) {
-        return function() {
-            infoWindow.open(map, oMarker);
-        }
-      })(oMarker, i));
-var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-
-map.addEventListener(oMarker, 'click', function() {
-  infoWindow.open(map, oMarker);
-})*/
-
-/*oMarker.addEventListener("click", detectClickMarker(oMarker));
-
-export function detectClickMarker(marker){
-    marker.openInfoWindowHtml(
-      '<strong>Testttt dedeyyy</strong>' +
-      '<br /><p>Dedeyyyyyy</p>' +
-      '<br /><a href="http://fr.wikipedia.org/wiki/Place_Bellecour">Voir l\'article sur Wikipedia (fr)</a>'
-    );
-}*/
-
-
-      

@@ -56,9 +56,11 @@ function main(){
 		let eStatus = document.getElementById("status-covid");
 		let strStatus = eStatus.options[eStatus.selectedIndex].value;
 		console.log(strCountries+strStatus);
-		let resultat = covid.get_country_status(strCountries,strStatus);
-
-
+		let resultat = [];
+		resultat = covid.get_country_status(strCountries,strStatus);
+		console.log(resultat);
+		google.showMap(resultat);
+		
 	})
 
 	var button = document.getElementById("b-air");
@@ -96,7 +98,8 @@ function main(){
 		}
 	});
 
-	google.showMap();
+	
+	
 	/*console.log(result.data);
 	return result.data;*/
 
@@ -118,7 +121,7 @@ function main(){
 		console.log(city_states); */
 		// google.initMap();
 	
-	};
+	
 
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
