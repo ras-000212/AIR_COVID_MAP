@@ -27,8 +27,6 @@ export var tMarker = [
 
 export function showMap(resss){
 
-  
-
   const loader = new Loader(API_key);
   
     loader.load().then(function (google) {
