@@ -6,6 +6,20 @@ function call(endpoint, requestOptions) {
 	return fetch(`${baseUrl}${endpoint}&key=${token}`, requestOptions)
 }
 
+
+export function get_countries_list(){
+		var requestOptions = {
+		  method: 'GET',
+		  redirect: 'follow'
+		};
+		var p =call("countries?", requestOptions)
+		  .then(response => response.json())
+		  .catch(error => console.log('error', error))
+		  
+		return p;  
+}
+
+
 export function get_states_list(){
 		var requestOptions = {
 		  method: 'GET',

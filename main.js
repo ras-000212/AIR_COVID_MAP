@@ -12,7 +12,11 @@ function main(){
 	btnCovid.setAttribute("id","btn-Covid");
 	btnCovid.innerHTML ="COVID-19";
 	rootBal.appendChild(btnCovid);
-
+	
+	let btnQuality = document.createElement("button");
+	btnQuality.setAttribute("id","btn-Quality");
+	btnQuality.innerHTML ="Air quality";
+	rootBal.appendChild(btnQuality);
 
 	//form Covid
 	let formCovid = document.createElement('form');
@@ -37,6 +41,16 @@ function main(){
 	btnShow.innerHTML ="afficher";
 	formCovid.appendChild(btnShow);
 
+	//form air-quality
+	let formQuality = document.createElement('form');
+	formQuality.setAttribute("id","form-quality");
+	formQuality.style.display="none";
+	rootBal.appendChild(formQuality);
+
+	//dropdown coutries
+	let selCountriesQua = document.createElement('select');
+	selCountriesQua.setAttribute("id","countries-quality");
+	formQuality.appendChild(selCountriesQua);
 	
 
 	btnCovid.addEventListener(`click`, function(){ 
@@ -63,13 +77,19 @@ function main(){
 		
 	})
 
-	var button = document.getElementById("b-air");
-	button.addEventListener('click', async function(){
+	btnQuality.addEventListener('click', async function(){
+		showFormQuality()
+		if(formQuality.style.display=="none"){
+			formQuality.style.display="block";
+		}else{
+			formQuality.style.display="none";
+		}
+		/*
 		let states_air=[];
 		let city_air=[];
 		let city_states=[];
 		
-		/* bdd des régions de la bdd */
+		/* bdd des régions de la bdd *//*
 		states_air = await air.get_states_list()
 		.then(result => {
 			console.log(result.data);
@@ -78,6 +98,7 @@ function main(){
 		console.log(states_air);
 		
 		/* bdd des villes de la bdd */
+		/*
 		for (var i=0; i<states_air.length;i++){
 			let city_air= await air.get_cities_list(states_air[i].state)
 			.then(result => {
@@ -87,7 +108,7 @@ function main(){
 		}
 		console.log(city_states);
 		
-		/* bdd des villes de la bdd */
+		/* bdd des informations des villes de la bdd *//*
 		for (var i=0; i<states_air.length;i++){
 				for (var j=0; j<city_states[i].length;j++){
 					let city_air= await air.get_specified_city(city_states[i][j],states_air[i])
@@ -95,33 +116,11 @@ function main(){
 						console.log(result.data);
 					});
 			}
-		}
+		}*/
 	});
-
 	
-	
-	/*console.log(result.data);
-	return result.data;*/
-
-
-	//afficher marqueurs
 
 };
-/* 			console.log(result.data);
-			return result.data;
- */
-/* 		console.log(states_air);
-		for (var i=0; i<states_air.length;i++){
-			let city_air = air.get_cities_list(states_air[i].state)
-			.then(result => {
-				return result.data;
-			});
-			city_states[i] = city_air;
-		}
-		console.log(city_states); */
-		// google.initMap();
-	
-	
 
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
@@ -156,7 +155,7 @@ function showFormCovid(){
 		dropdownStatus.length = 0;
 		let defaultOptionCovid = document.createElement('option');
 		defaultOptionCovid.text = "Choisissez l\'état";
-	
+
 		dropdownStatus.add(defaultOptionCovid);
 		dropdownStatus.selectedIndex = 0;
 
@@ -182,6 +181,29 @@ function recupCountries(){
 function formCovid(){
 
 }
+async function showFormQuality(){
 
+	let dropdownCountries = document.getElementById('countries-quality');
+	dropdownCountries.length = 0;
+	let defaultOptionCountries = document.createElement('option');
+	defaultOptionCountries.text = 'Choisissez le pays';
+
+	dropdownCountries.add(defaultOptionCountries);
+	dropdownCountries.selectedIndex = 0;
+	
+	let countries_list=[];
+	countries_list = await air.get_countries_list()
+	.then(result => {
+			console.log(result.data);
+	
+			for(var i = 1; i <result.data.length;i++){
+				option = document.createElement('option');
+				option.text = result.data[i].country;
+				option.value = result.data[i].country;
+				dropdownCountries.add(option);
+			}
+		});
+	
+}
 window.addEventListener("DOMContentLoaded", main);
 
