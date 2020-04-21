@@ -52,6 +52,21 @@ function main(){
 	selCountriesQua.setAttribute("id","countries-quality");
 	formQuality.appendChild(selCountriesQua);
 	
+	//dropdown states
+	let selStatesQua = document.createElement('select');
+	selStatesQua.setAttribute("id","states-quality");
+	formQuality.appendChild(selStatesQua);
+	
+	//dropdown city
+	let selCitiesQua = document.createElement('select');
+	selCitiesQua.setAttribute("id","cities-quality");
+	formQuality.appendChild(selCitiesQua);
+	
+	//table result
+	let table_airquality = document.createElement('table');
+	table_airquality.setAttribute("id","table-quality");
+	formQuality.appendChild(table_airquality);
+	
 
 	btnCovid.addEventListener(`click`, function(){ 
 		showFormCovid();
@@ -78,50 +93,161 @@ function main(){
 	})
 
 	btnQuality.addEventListener('click', async function(){
-		showFormQuality()
 		if(formQuality.style.display=="none"){
+			showFormQuality()
 			formQuality.style.display="block";
 		}else{
 			formQuality.style.display="none";
 		}
-		/*
-		let states_air=[];
-		let city_air=[];
-		let city_states=[];
-		
-		/* bdd des régions de la bdd *//*
-		states_air = await air.get_states_list()
-		.then(result => {
-			console.log(result.data);
-			return result.data;
-		});
-		console.log(states_air);
-		
-		/* bdd des villes de la bdd */
-		/*
-		for (var i=0; i<states_air.length;i++){
-			let city_air= await air.get_cities_list(states_air[i].state)
-			.then(result => {
-				return result.data;
-			});
-			city_states[i] = city_air;
-		}
-		console.log(city_states);
-		
-		/* bdd des informations des villes de la bdd *//*
-		for (var i=0; i<states_air.length;i++){
-				for (var j=0; j<city_states[i].length;j++){
-					let city_air= await air.get_specified_city(city_states[i][j],states_air[i])
-					.then(result => {
-						console.log(result.data);
-					});
-			}
-		}*/
 	});
 	
+	selCountriesQua.addEventListener('change', async function(){
+		let dropdownCountries = document.getElementById('countries-quality');
+		let country = dropdownCountries.options[dropdownCountries.selectedIndex].value;
+		console.log(country);
+		
+		/*prepare dropdownStates */
+		let dropDownStates = document.getElementById("states-quality");
+		dropDownStates.length = 0;
+		let defaultOptionStates = document.createElement('option');
+		defaultOptionStates.text = 'Choisissez l etat';
+		dropDownStates.add(defaultOptionStates);
+		dropDownStates.selectedIndex = 0;
+		
+		/*call api air quality to get states list */
+		let states_list=[];
+		states_list = await air.get_states_list(country)
+		.then(result => {
+			console.log(result.data);
+			for(var i = 0; i <result.data.length;i++){
+				option = document.createElement('option');
+				option.text = result.data[i].state;
+				option.value = result.data[i].state;
+				dropDownStates.add(option);
+			}
+		});
+		
+	});
 
+	selStatesQua.addEventListener('change', async function(){
+		/*recover parameters for API */
+		let dropdownCountries = document.getElementById('countries-quality');
+		let country = dropdownCountries.options[dropdownCountries.selectedIndex].value;
+		let dropDownStates = document.getElementById('states-quality');
+		let state = dropDownStates.options[dropDownStates.selectedIndex].value;
+		console.log(country);
+		console.log(state);
+		
+		/*prepare dropdownCities */
+		let dropDownCities = document.getElementById("cities-quality");
+		dropDownCities.length = 0;
+		let defaultOptionCity = document.createElement('option');
+		defaultOptionCity.text = 'Choisissez la ville';
+		dropDownCities.add(defaultOptionCity);
+		dropDownCities.selectedIndex = 0;
+		
+		/*call api air quality to get cities list */
+		await air.get_cities_list(country,state)
+		.then(result => {
+			console.log(result.data);
+			for(var i = 0; i <result.data.length;i++){
+				option = document.createElement('option');
+				option.text = result.data[i].city;
+				option.value = result.data[i].city;
+				dropDownCities.add(option);
+			}
+		});
+	});
+	
+	selStatesQua.addEventListener('change', async function(){
+		/*recover parameters for API */
+		let dropdownCountries = document.getElementById('countries-quality');
+		let country = dropdownCountries.options[dropdownCountries.selectedIndex].value;
+		let dropDownStates = document.getElementById('states-quality');
+		let state = dropDownStates.options[dropDownStates.selectedIndex].value;
+		console.log(country);
+		console.log(state);
+		
+		/*prepare dropdownCities */
+		let dropDownCities = document.getElementById("cities-quality");
+		dropDownCities.length = 0;
+		let defaultOptionCity = document.createElement('option');
+		defaultOptionCity.text = 'Choisissez la ville';
+		dropDownCities.add(defaultOptionCity);
+		dropDownCities.selectedIndex = 0;
+		
+		/*call api air quality to get cities list */
+		await air.get_cities_list(country,state)
+		.then(result => {
+			console.log(result.data);
+			for(var i = 0; i <result.data.length;i++){
+				option = document.createElement('option');
+				option.text = result.data[i].city;
+				option.value = result.data[i].city;
+				dropDownCities.add(option);
+			}
+		});
+	});
+	selCitiesQua.addEventListener('change',async function(){
+		/*recover parameters for API */
+		let dropdownCountries = document.getElementById('countries-quality');
+		let country = dropdownCountries.options[dropdownCountries.selectedIndex].value;
+		let dropDownStates = document.getElementById('states-quality');
+		let state = dropDownStates.options[dropDownStates.selectedIndex].value;
+		let dropDownCities = document.getElementById('cities-quality');
+		let city = dropDownCities.options[dropDownCities.selectedIndex].value;
+		
+		console.log(country);
+		console.log(state);
+		console.log(city);
+		
+		/*prepare table */
+		let table = document.getElementById("table-quality");
+		let table_row = document.createElement("tr");
+		let table_title = document.createElement("th");
+		table_title = document.createTextNode("Date")
+		table_row.appendChild(table_title)
+		table_title = document.createTextNode("Pollution")
+		table_row.appendChild(table_title)
+		table_title = document.createTextNode("Weather")
+		table_row.appendChild(table_title)
+		let table_results = document.createElement("tr");
+		
+		table.appendChild(table_row)
+		
+		
+		/*call api air quality to get specified values of the city */
+		await air.get_specified_city(country,state, city)
+		.then(result => {
+			console.log(result.data);
+			console.log(result.data.current.pollution.hu);
+			console.log(result.data.current.weather.hu);
+			//add date
+			cell = document.createElement("td");
+			texte = document.createTextNode(result.data.current.pollution.ts);
+			cell.appendChild(texte);
+			table_results.appendChild(cell)
+			
+			//add pollution
+			cell = document.createElement("td");
+			texte = document.createTextNode(result.data.current.pollution.aqicn);
+			cell.appendChild(texte);
+			table_results.appendChild(cell)
+			
+			//add weather
+			cell = document.createElement("td");
+			texte = document.createTextNode(result.data.current.weather.hu);
+			cell.appendChild(texte);
+			table_results.appendChild(cell)
+			
+			
+			table.appendChild(table_results)
+			
+			formQuality.appendChild(table)
+		});
+	});
 };
-
+	
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
 function showFormCovid(){
