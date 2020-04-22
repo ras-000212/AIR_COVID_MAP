@@ -240,6 +240,10 @@ function main(){
 			table.appendChild(table_results)
 			
 			formQuality.appendChild(table)
+			
+			/*ajout de marqueurs */
+			//result.data.location.coordinate[0], [1]
+			
 		});
 	});
 };
