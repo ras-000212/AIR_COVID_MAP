@@ -229,7 +229,11 @@ function main(){
 				//Temps : sun, rain
 				var col1 = document.createElement("td");
 				var img = document.createElement("IMG");
-				img.src = 'images/'+result.data.current.weather.ic+'.png';
+				var icone = result.data.current.weather.ic;
+				console.log(icone);
+				console.log("./images/"+icone+".png");
+				var contenu = "./images/"+icone+".png";
+				img.setAttribute("src",contenu);
 				col1.appendChild(img); //doesn't work, don't see the image
 				newRow.appendChild(col1);
 				
