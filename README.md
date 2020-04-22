@@ -19,6 +19,7 @@ You didn't need a account to use our Webapp.
 To use our website you will have to install Git : https://git-scm.com/downloads
 
 Download all the project on GIT.
+
 Execute index.html
 
 ## Tech/framework used
