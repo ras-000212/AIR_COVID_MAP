@@ -73,19 +73,17 @@ function main(){
 	selCitiesQua.setAttribute("id","cities-quality");
 	formQuality.appendChild(selCitiesQua);
 	
-	//table result creation à supp ptt IL EST INSERE PLUS BAS
+	//table result creation
 	let table_airquality = document.createElement('table');
 	table_airquality.setAttribute("id","table-quality");
-	table_airquality.setAttribute("border", "2");
+	table_airquality.setAttribute("border", "1");
 	table_airquality.setAttribute("style", "width:100%");
 	let t_values = document.createElement('tr');
 	t_values.setAttribute("id", "qualityTITLE");
 	table_airquality.appendChild(t_values);
 
-	//création des colonnes sur la 1ere ligne...
-	
-
-	let titles = ['Température', 'Humidité', 'Vent', 'Pression', 'Taux de qualité de l air'];
+	//creation column 
+	let titles = ['Temps','Température', 'Humidité', 'Vent', 'Pression', 'Taux de qualité de l air'];
 	for(i=0; i<titles.length; i++){
 		let c1 = document.createElement('td');
 		let name = "c" + i;
@@ -132,7 +130,6 @@ function main(){
 		}
 	});
 
-	
 	selCountriesQua.addEventListener('change', async function(){
 		
 		let dropdownCountries = document.getElementById('countries-quality');
@@ -143,7 +140,7 @@ function main(){
 		let dropDownStates = document.getElementById("states-quality");
 		dropDownStates.length = 0;
 		let defaultOptionStates = document.createElement('option');
-		defaultOptionStates.text = 'Choisissez l etat';
+		defaultOptionStates.text = 'Choisissez la region';
 		dropDownStates.add(defaultOptionStates);
 		dropDownStates.selectedIndex = 0;
 		
@@ -192,37 +189,6 @@ function main(){
 		});
 	});
 	
-	selStatesQua.addEventListener('change', async function(){
-		/*recover parameters for API */
-		let dropdownCountries = document.getElementById('countries-quality');
-		let country = dropdownCountries.options[dropdownCountries.selectedIndex].value;
-		let dropDownStates = document.getElementById('states-quality');
-		let state = dropDownStates.options[dropDownStates.selectedIndex].value;
-		console.log(country);
-		console.log(state);
-		
-		/*prepare dropdownCities */
-		let dropDownCities = document.getElementById("cities-quality");
-		dropDownCities.length = 0;
-		let defaultOptionCity = document.createElement('option');
-		defaultOptionCity.text = 'Choisissez la ville';
-		dropDownCities.add(defaultOptionCity);
-		dropDownCities.selectedIndex = 0;
-		
-		/*call api air quality to get cities list */
-		await air.get_cities_list(country,state)
-		.then(result => {
-			console.log(result.data);
-			for(var i = 0; i <result.data.length;i++){
-				option = document.createElement('option');
-				option.text = result.data[i].city;
-				option.value = result.data[i].city;
-				dropDownCities.add(option);
-			}
-		});
-	});
-
-	/* partie Gaelle */
 
 	selCitiesQua.addEventListener('change',async function(){
 		/*recover parameters for API */
@@ -237,7 +203,7 @@ function main(){
 		console.log(state);
 		console.log(city);
 		
-		//creation autre bouton
+		//creation button show
 		let btnShowQuality = document.createElement('button');
 		btnShowQuality.setAttribute("id", "btnShowQuality");
 		btnShowQuality.setAttribute("type","button")
@@ -246,47 +212,58 @@ function main(){
 
 		btnShowQuality.addEventListener('click',async function(){
 
-			/*on ajoute le tableau */
+			/*we add the table */
 			results_airquality.appendChild(table_airquality);
 			formQuality.style.display = "none";
 			btnShowQuality.remove();
 			
-			/* et on le remplit selon le résultat*/
+			/*call api air quality to get information of the city */
 			await air.get_specified_city(country,state, city)
 			.then(result => {
 				console.log(result.data);
 				
-				//add Time icone
+				//creation of a new row
 				var newRow = document.createElement("tr");
 				table_airquality.appendChild(newRow);
 				
-
+				//Temps : sun, rain
 				var col1 = document.createElement("td");
-				var texte1 = document.createTextNode(result.data.current.weather.ic);
-				col1.appendChild(texte1);
+				var img = document.createElement("IMG");
+				img.src = 'images/'+result.data.current.weather.ic+'.png';
+				col1.appendChild(img); //doesn't work, don't see the image
 				newRow.appendChild(col1);
 				
+				//Temperature
 				var col2 = document.createElement("td");
-				var texte2 = document.createTextNode(result.data.current.pollution.aqicn);
-				col2.appendChild(texte2);
+				var text2 = document.createTextNode(result.data.current.weather.tp);
+				col2.appendChild(text2);
 				newRow.appendChild(col2);
-
+				
+				//Humidity
 				var col3 = document.createElement("td");
-				var texte3 = document.createTextNode("t3");
-				col3.appendChild(texte3);
+				var text3 = document.createTextNode(result.data.current.weather.hu);
+				col3.appendChild(text3);
 				newRow.appendChild(col3);
-
+				
+				//Wind
 				var col4 = document.createElement("td");
-				var texte4 = document.createTextNode("t4");
-				col4.appendChild(texte4);
+				var text4 = document.createTextNode(result.data.current.weather.wd);
+				col4.appendChild(text4);
 				newRow.appendChild(col4);
-
+				
+				//Pressure
 				var col5 = document.createElement("td");
-				var texte5 = document.createTextNode("t5");
-				col5.appendChild(texte5);
+				var text5 = document.createTextNode(result.data.current.weather.pr);
+				col5.appendChild(text5);
 				newRow.appendChild(col5);
 				
-				//google map en attendant...
+				//AQI
+				var col6 = document.createElement("td");
+				var text6 = document.createTextNode(result.data.current.pollution.aqicn);
+				col6.appendChild(text6);
+				newRow.appendChild(col6);
+				
+				//google map
 
 				let r = [];
 				r[0] = result.data.location.coordinates[0];
@@ -294,10 +271,10 @@ function main(){
 				console.log(r);
 				google.showMapQuality(r);
 
-				//fonctionne pas
+				//doesn't work 
 				/*here.insertHTMLSRC();
 				here.showHereMap();*/
-				/*ajout de marqueurs */
+				/*add marqueurs */
 				//result.data.location.coordinate[0], [1]
 				
 			});
