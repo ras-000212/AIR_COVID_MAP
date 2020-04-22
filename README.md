@@ -43,6 +43,9 @@ We credit this project to Romain Baugue who helped us to code in JavaScript and 
 ## Contact
 If you need more informations you can contact us :
 Alexis SOK : r.alexis.sok@gmail.com;
+
 Gaelle FERREIRA : gaelle.ferreira.77@gmail.com;
+
 Audrey ALCARAZ : dedealca@gmail.com;
+
 Tristan DELIGNE-LUQUE : tristan.projetd@gmail.com
