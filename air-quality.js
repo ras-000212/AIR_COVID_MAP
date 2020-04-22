@@ -20,12 +20,12 @@ export function get_countries_list(){
 }
 
 
-export function get_states_list(){
+export function get_states_list(country){
 		var requestOptions = {
 		  method: 'GET',
 		  redirect: 'follow'
 		};
-		var p =call("states?country=France", requestOptions)
+		var p =call("states?country="+country, requestOptions)
 		  .then(response => response.json())
 		  .catch(error => console.log('error', error))
 		  
@@ -33,13 +33,13 @@ export function get_states_list(){
 }
 
  
-export function get_cities_list(state){
+export function get_cities_list(country,state){
 		var requestOptions = {
 		  method: 'GET',
 		  redirect: 'follow'
 		};
 		
-		let request = "cities?state="+state+"&country=France";
+		let request = "cities?state="+state+"&country="+country;
 		console.log(state);
 		var p =call(request, requestOptions)
 		  .then(response => response.json())
@@ -48,13 +48,13 @@ export function get_cities_list(state){
 		return p;  
 } 
 
-export function get_specified_city(city,state){
+export function get_specified_city(country, state, city){
 		var requestOptions = {
 		  method: 'GET',
 		  redirect: 'follow'
 		};
 		
-		let request = "city?city="+city+"&state="+state+"&country=France";
+		let request = "city?city="+city+"&state="+state+"&country=" +country;
 		var p =call(request, requestOptions)
 		  .then(response => response.json())
 		  .catch(error => console.log('error', error))
