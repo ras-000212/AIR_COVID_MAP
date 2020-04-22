@@ -5,6 +5,8 @@ require("regenerator-runtime/runtime");
 
 
 function main(){
+	let results_airquality = document.getElementById("results_airquality");
+	results_airquality.style.display ="none";
 	
 	let rootBal =document.getElementById("root");
 
@@ -96,8 +98,10 @@ function main(){
 		if(formQuality.style.display=="none"){
 			showFormQuality()
 			formQuality.style.display="block";
+			results_airquality.style.display ="block";
 		}else{
 			formQuality.style.display="none";
+			results_airquality.style.display ="none";
 		}
 	});
 	
@@ -202,41 +206,33 @@ function main(){
 		console.log(city);
 		
 		/*prepare table */
-		let table = document.getElementById("table-quality");
-		let table_row = document.createElement("tr");
-		let table_title = document.createElement("th");
-		table_title = document.createTextNode("Date")
-		table_row.appendChild(table_title)
-		table_title = document.createTextNode("Pollution")
-		table_row.appendChild(table_title)
-		table_title = document.createTextNode("Weather")
-		table_row.appendChild(table_title)
-		let table_results = document.createElement("tr");
-		
-		table.appendChild(table_row)
-		
+		let table = document.getElementById("tab_airquality");
+		let table_results = document.getElementById("table_values");
 		
 		/*call api air quality to get specified values of the city */
 		await air.get_specified_city(country,state, city)
 		.then(result => {
 			console.log(result.data);
-			console.log(result.data.current.pollution.hu);
-			console.log(result.data.current.weather.hu);
-			//add date
-			cell = document.createElement("td");
-			texte = document.createTextNode(result.data.current.pollution.ts);
+			
+			//add Time icone
+			var cell = document.createElement("td");
+			cell.text ="td_ic"
+			var texte = document.createTextNode(result.data.current.weather.ic);
 			cell.appendChild(texte);
 			table_results.appendChild(cell)
+			table.appendChild(table_results)
 			
 			//add pollution
-			cell = document.createElement("td");
-			texte = document.createTextNode(result.data.current.pollution.aqicn);
+			var cell = document.createElement("td");
+			cell.text ="td_pollution"
+			var texte = document.createTextNode(result.data.current.pollution.aqicn);
 			cell.appendChild(texte);
 			table_results.appendChild(cell)
+			table.appendChild(table_results)
 			
 			//add weather
-			cell = document.createElement("td");
-			texte = document.createTextNode(result.data.current.weather.hu);
+			var cell = document.createElement("td");
+			var texte = document.createTextNode(result.data.current.weather.hu);
 			cell.appendChild(texte);
 			table_results.appendChild(cell)
 			
