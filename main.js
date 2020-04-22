@@ -6,6 +6,8 @@ require("regenerator-runtime/runtime");
 
 function main(){
 	let results_airquality = document.getElementById("results_airquality");
+	
+	//deviendra inutile...
 	results_airquality.style.display ="none";
 	
 	let rootBal =document.getElementById("root");
@@ -19,6 +21,9 @@ function main(){
 	btnQuality.setAttribute("id","btn-Quality");
 	btnQuality.innerHTML ="Air quality";
 	rootBal.appendChild(btnQuality);
+
+
+
 
 	//form Covid
 	let formCovid = document.createElement('form');
@@ -36,12 +41,15 @@ function main(){
 	selStatusCov.setAttribute("id","status-covid");
 	formCovid.appendChild(selStatusCov);
 
-	//button "afficher"
+	//button "afficher" COVID
 	let btnShow= document.createElement("button");
 	btnShow.setAttribute("id","btn-Covid-show");
 	btnShow.setAttribute("type","button")
 	btnShow.innerHTML ="afficher";
 	formCovid.appendChild(btnShow);
+
+
+
 
 	//form air-quality
 	let formQuality = document.createElement('form');
@@ -64,11 +72,19 @@ function main(){
 	selCitiesQua.setAttribute("id","cities-quality");
 	formQuality.appendChild(selCitiesQua);
 	
-	//table result
+	//table result creation à supp ptt
 	let table_airquality = document.createElement('table');
 	table_airquality.setAttribute("id","table-quality");
 	formQuality.appendChild(table_airquality);
 	
+	//creation autre bouton
+	let btnShowQuality = document.createElement('button');
+	btnShowQuality.setAttribute("id", "btnShowQuality");
+	btnShowQuality.setAttribute("type","button")
+	btnShowQuality.innerHTML ="Afficher";
+	formQuality.appendChild(btnShowQuality);
+
+
 
 	btnCovid.addEventListener(`click`, function(){ 
 		showFormCovid();
@@ -79,7 +95,7 @@ function main(){
 		}
 	});
 
-//get the dropdown value and call the getcountrystatus
+	//get the dropdown value and call the getcountrystatus
 	btnShow.addEventListener(`click`,function(){
 		let ecountries = document.getElementById("countries-covid");
 		let strCountries = ecountries.options[ecountries.selectedIndex].value;
@@ -104,8 +120,10 @@ function main(){
 			results_airquality.style.display ="none";
 		}
 	});
+
 	
 	selCountriesQua.addEventListener('change', async function(){
+		
 		let dropdownCountries = document.getElementById('countries-quality');
 		let country = dropdownCountries.options[dropdownCountries.selectedIndex].value;
 		console.log(country);
@@ -192,6 +210,9 @@ function main(){
 			}
 		});
 	});
+
+	/* partie Gaelle */
+
 	selCitiesQua.addEventListener('change',async function(){
 		/*recover parameters for API */
 		let dropdownCountries = document.getElementById('countries-quality');
