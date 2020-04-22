@@ -18,12 +18,9 @@ You didn't need a account to use our Webapp.
 ## Installation
 To use our website you will have to install Git : https://git-scm.com/downloads
 
-***Available soon***
+Download all the project on GIT.
 
-
-## Code Style
-
-***Available soon***
+Execute `index.html`
 
 ## Tech/framework used
 We code mostly in `JavaScript` and `HTML`.
@@ -45,7 +42,11 @@ We credit this project to Romain Baugue who helped us to code in JavaScript and 
 
 ## Contact
 If you need more informations you can contact us :
+
 Alexis SOK : r.alexis.sok@gmail.com;
+
 Gaelle FERREIRA : gaelle.ferreira.77@gmail.com;
+
 Audrey ALCARAZ : dedealca@gmail.com;
+
 Tristan DELIGNE-LUQUE : tristan.projetd@gmail.com
