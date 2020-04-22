@@ -49,6 +49,43 @@ export function showMap(resss){
 
 }
 
+export function showMapQuality(r){
+
+  const loader = new Loader(API_key);
+  
+    loader.load().then(function (google) {
+      var map;
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 42.71, lng: 19.37},
+        zoom: 1
+      });
+
+      createMarqueurQuality(r, map);
+  
+    });
+
+}
+
+export function createMarqueurQuality(tab, map){
+  var oLatLng, oMarker;
+    
+  //var i, nb = tab.length;
+  console.log(tab); 
+
+    let lati = tab[1];
+    let longi = tab[0];
+
+    oLatLng = new google.maps.LatLng( lati, longi);
+    oMarker = new google.maps.Marker({
+      position : oLatLng,
+      map : map
+    });
+
+    attachSecretMessage(oMarker, "message à voir...");
+
+}
+
 export function createMarqueur(tab, map){
     var oLatLng, oMarker, data;
     
@@ -66,13 +103,6 @@ export function createMarqueur(tab, map){
           position : oLatLng,
           map : map
         });
-  
-        /*let popup = new google.maps.InfoWindow({
-          content: data.date,
-          map : map,
-          maxWidth: 300,
-          maxHeight:100
-        });*/
   
         attachSecretMessage(oMarker, data.date);
       }

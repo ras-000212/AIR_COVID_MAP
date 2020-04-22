@@ -1,6 +1,7 @@
 var covid = require(`./covid-19.js`);
 var air = require(`./air-quality.js`);
 var google = require('./google_map.js');
+var here = require('./here-Map.js');
 require("regenerator-runtime/runtime");
 
 
@@ -72,19 +73,29 @@ function main(){
 	selCitiesQua.setAttribute("id","cities-quality");
 	formQuality.appendChild(selCitiesQua);
 	
-	//table result creation à supp ptt
+	//table result creation à supp ptt IL EST INSERE PLUS BAS
 	let table_airquality = document.createElement('table');
 	table_airquality.setAttribute("id","table-quality");
-	formQuality.appendChild(table_airquality);
+	table_airquality.setAttribute("border", "2");
+	table_airquality.setAttribute("style", "width:100%");
+	let t_values = document.createElement('tr');
+	t_values.setAttribute("id", "qualityTITLE");
+	table_airquality.appendChild(t_values);
+
+	//création des colonnes sur la 1ere ligne...
 	
-	//creation autre bouton
-	let btnShowQuality = document.createElement('button');
-	btnShowQuality.setAttribute("id", "btnShowQuality");
-	btnShowQuality.setAttribute("type","button")
-	btnShowQuality.innerHTML ="Afficher";
-	formQuality.appendChild(btnShowQuality);
 
-
+	let titles = ['Température', 'Humidité', 'Vent', 'Pression', 'Taux de qualité de l air'];
+	for(i=0; i<titles.length; i++){
+		let c1 = document.createElement('td');
+		let name = "c" + i;
+		c1.setAttribute("id", name);
+		let t = titles[i];
+		let valText = document.createTextNode(t);
+		c1.appendChild(valText);
+		t_values.appendChild(c1);
+	}
+	
 
 	btnCovid.addEventListener(`click`, function(){ 
 		showFormCovid();
@@ -226,47 +237,77 @@ function main(){
 		console.log(state);
 		console.log(city);
 		
-		/*prepare table */
-		let table = document.getElementById("tab_airquality");
-		let table_results = document.getElementById("table_values");
+		//creation autre bouton
+		let btnShowQuality = document.createElement('button');
+		btnShowQuality.setAttribute("id", "btnShowQuality");
+		btnShowQuality.setAttribute("type","button")
+		btnShowQuality.innerHTML ="Afficher";
+		formQuality.appendChild(btnShowQuality);
+
+		btnShowQuality.addEventListener('click',async function(){
+
+			/*on ajoute le tableau */
+			results_airquality.appendChild(table_airquality);
+			formQuality.style.display = "none";
+			btnShowQuality.remove();
+			
+			/* et on le remplit selon le résultat*/
+			await air.get_specified_city(country,state, city)
+			.then(result => {
+				console.log(result.data);
+				
+				//add Time icone
+				var newRow = document.createElement("tr");
+				table_airquality.appendChild(newRow);
+				
+
+				var col1 = document.createElement("td");
+				var texte1 = document.createTextNode(result.data.current.weather.ic);
+				col1.appendChild(texte1);
+				newRow.appendChild(col1);
+				
+				var col2 = document.createElement("td");
+				var texte2 = document.createTextNode(result.data.current.pollution.aqicn);
+				col2.appendChild(texte2);
+				newRow.appendChild(col2);
+
+				var col3 = document.createElement("td");
+				var texte3 = document.createTextNode("t3");
+				col3.appendChild(texte3);
+				newRow.appendChild(col3);
+
+				var col4 = document.createElement("td");
+				var texte4 = document.createTextNode("t4");
+				col4.appendChild(texte4);
+				newRow.appendChild(col4);
+
+				var col5 = document.createElement("td");
+				var texte5 = document.createTextNode("t5");
+				col5.appendChild(texte5);
+				newRow.appendChild(col5);
+				
+				//google map en attendant...
+
+				let r = [];
+				r[0] = result.data.location.coordinates[0];
+				r[1] = result.data.location.coordinates[1];
+				console.log(r);
+				google.showMapQuality(r);
+
+				//fonctionne pas
+				/*here.insertHTMLSRC();
+				here.showHereMap();*/
+				/*ajout de marqueurs */
+				//result.data.location.coordinate[0], [1]
+				
+			});
+	
+		})
 		
-		/*call api air quality to get specified values of the city */
-		await air.get_specified_city(country,state, city)
-		.then(result => {
-			console.log(result.data);
-			
-			//add Time icone
-			var cell = document.createElement("td");
-			cell.text ="td_ic"
-			var texte = document.createTextNode(result.data.current.weather.ic);
-			cell.appendChild(texte);
-			table_results.appendChild(cell)
-			table.appendChild(table_results)
-			
-			//add pollution
-			var cell = document.createElement("td");
-			cell.text ="td_pollution"
-			var texte = document.createTextNode(result.data.current.pollution.aqicn);
-			cell.appendChild(texte);
-			table_results.appendChild(cell)
-			table.appendChild(table_results)
-			
-			//add weather
-			var cell = document.createElement("td");
-			var texte = document.createTextNode(result.data.current.weather.hu);
-			cell.appendChild(texte);
-			table_results.appendChild(cell)
-			
-			
-			table.appendChild(table_results)
-			
-			formQuality.appendChild(table)
-			
-			/*ajout de marqueurs */
-			//result.data.location.coordinate[0], [1]
-			
-		});
+		
 	});
+
+	
 };
 	
 
