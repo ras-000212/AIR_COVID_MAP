@@ -34,7 +34,6 @@ export function showMap(resss){
  
       resss.then(values => { 
         let d = values[1];
-        console.log(d); //ça marche!!!
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 42.71, lng: 19.37},
@@ -71,7 +70,6 @@ export function createMarqueurQuality(tab, map){
   var oLatLng, oMarker;
     
   //var i, nb = tab.length;
-  console.log(tab); 
 
     let lati = tab[1];
     let longi = tab[0];
@@ -87,14 +85,15 @@ export function createMarqueurQuality(tab, map){
 }
 
 export function createMarqueur(tab, map){
+  console.log(tab);
     var oLatLng, oMarker, data;
     
     tab.then(values => { 
 
-      var i, nb = values.length;
+      var nb = values.length;
       console.log(nb); 
       
-      for( i = 0; i < nb; i++){
+      for(var i = 0; i < nb; i++){
         
         data = values[i];
         
@@ -103,7 +102,7 @@ export function createMarqueur(tab, map){
           position : oLatLng,
           map : map
         });
-  
+        console.log(data.lat,data.lon)
         attachSecretMessage(oMarker, data.date);
       }
 
