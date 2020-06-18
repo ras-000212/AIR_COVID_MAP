@@ -230,9 +230,9 @@ function main(){
 				var img = document.createElement("IMG");
 				var icone = result.data.current.weather.ic;
 				console.log(icone);
-				console.log("./images/"+icone+".png");
+				console.log(`/`+icone+`.png`);
 				console.log(getNameImage(icone),icone);
-				var contenu ="02n.4f989662.png";
+				var contenu =`/`+icone+`.png`;
 				img.setAttribute("src",contenu);
 				col1.appendChild(img); //doesn't work, don't see the image
 				newRow.appendChild(col1);
@@ -293,33 +293,6 @@ function main(){
 
 
 
-
-
-
-function getNameImage(name){
-	switch (name){
-		case '01d':
-			return "/01d.5932511d.png";
-		case'01n':
-			return "/01n.36c9116a.png";
-		case '02d':
-			return"/02d.2bdfb385.png";
-		case '02n':
-			return "/02n.4f989662.png";
-		case '03d':
-			return"/03d.e5fbf353.png";
-		case '04d':
-			return"/04d.aad7a183.png";
-		case '09d':
-			return "/09d.a1a77f13.png";
-		case '10d':
-			return"/10d.52f10f4c.png";
-		case '10n':
-			return"/10n.1c57f29c.png";
-		default:return"";
-	}
-}
-	
 
 //voir avec le prof comment on fait pour ne pas mettre ça la
 function showFormCovid(){
