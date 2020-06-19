@@ -23,8 +23,6 @@ function main(){
 	rootBal.appendChild(btnQuality);
 
 
-
-
 	//form Covid
 	let formCovid = document.createElement('form');
 	formCovid.setAttribute("id","form-covid");
