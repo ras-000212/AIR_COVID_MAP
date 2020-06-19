@@ -59,7 +59,7 @@ export function showMapQuality(r){
         center: {lat: 42.71, lng: 19.37},
         zoom: 1
       });
-
+      
       createMarqueurQuality(r, map);
   
     });
@@ -70,7 +70,7 @@ export function createMarqueurQuality(tab, map){
   var oLatLng, oMarker;
     
   //var i, nb = tab.length;
-
+    console.log("le reste du tableau :", tab);
     let lati = tab[1];
     let longi = tab[0];
 
@@ -80,7 +80,9 @@ export function createMarqueurQuality(tab, map){
       map : map
     });
 
-    attachSecretMessage(oMarker, "message à voir...");
+    var m = "pays : " + tab[2] + " <br> région : " + tab[3] + "<br> ville : " + tab[4]; 
+
+    attachSecretMessage(oMarker, m);
 
 }
 

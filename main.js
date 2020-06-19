@@ -231,7 +231,7 @@ function main(){
 				var icone = result.data.current.weather.ic;
 				console.log(icone);
 				console.log(`/`+icone+`.png`);
-				console.log(getNameImage(icone),icone);
+				//console.log(getNameImage(icone),icone);
 				var contenu =`/`+icone+`.png`;
 				img.setAttribute("src",contenu);
 				col1.appendChild(img); //doesn't work, don't see the image
@@ -272,6 +272,9 @@ function main(){
 				let r = [];
 				r[0] = result.data.location.coordinates[0];
 				r[1] = result.data.location.coordinates[1];
+				r[2] = country;
+				r[3] = state;
+				r[4] = city;
 				console.log(r);
 				google.showMapQuality(r);
 
