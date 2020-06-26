@@ -23,13 +23,13 @@ Download all the project on GIT.
 
 Open the cmd and run the following commands :
 
-npm init
+##### npm init
 
-npm install --save-dev parcel-bundler
+##### npm install --save-dev parcel-bundler
 
-./node_modules/.bin/parcel build index.html
+##### ./node_modules/.bin/parcel build index.html
 
-./node_modules/.bin/parcel serve index.html
+##### ./node_modules/.bin/parcel serve index.html
 
 
 
