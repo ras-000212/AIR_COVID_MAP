@@ -17,10 +17,22 @@ You didn't need a account to use our Webapp.
 
 ## Installation
 To use our website you will have to install Git : https://git-scm.com/downloads
+And nmp : https://www.npmjs.com/
 
 Download all the project on GIT.
 
-Execute `index.html`
+Open the cmd and run the following commands :
+
+npm init
+
+npm install --save-dev parcel-bundler
+
+./node_modules/.bin/parcel build index.html
+
+./node_modules/.bin/parcel serve index.html
+
+
+
 
 ## Tech/framework used
 We code mostly in `JavaScript` and `HTML`.
