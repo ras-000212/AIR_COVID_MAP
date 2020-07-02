@@ -57,7 +57,7 @@ If you need more informations you can contact us :
 
 Alexis SOK : r.alexis.sok@gmail.com;
 
-Gaelle FERREIRA : gaelle.ferreira.77@gmail.com;
+Gaelle FERREIRA : gaelle_f@live.fr
 
 Audrey ALCARAZ : dedealca@gmail.com;
 
